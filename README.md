@@ -1,4 +1,4 @@
-![Laravel best practices]
+# Laravel best practices
 
 ## Contents
 
