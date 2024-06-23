@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Requests\SignupRequest;
+use App\Http\Requests\LoginRequest;
+use Auth;
 
 class AuthController extends Controller
 {
@@ -43,20 +45,20 @@ class AuthController extends Controller
             // return response()->json(compact('user','token'), 201);
         }
 
-    // public function login(LoginRequest $request){
-    //         $credentials = $request->validated();
-    //         if(!Auth::attempt($credentials)){
-    //                 return response([
-    //                     'message' => 'Provided email address or password is incorrect'
-    //                 ], 422);
-    //         }
+    public function login(LoginRequest $request){
+            $credentials = $request->validated();
+            if(!Auth::attempt($credentials)){
+                    return response([
+                        'message' => 'Provided email address or password is incorrect'
+                    ], 422);
+            }
 
-    //         $user = Auth::user();
+            $user = Auth::user();
 
-    //         $token = $user->createToken('main')->plainTextToken;
+            $token = $user->createToken('main')->plainTextToken;
             
-    //         return response(compact('user', 'token'), 200);
-    //     }
+            return response(compact('user', 'token'), 200);
+        }
 
     public function logout(Request $request){
             $user = $request->user();
